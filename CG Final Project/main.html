@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Team Solo Maze</title>
+
+        <meta charset="utf-8">
+        <meta name="author" content="Kevin Donovan">
+        <meta name="description" content="My Computer Graphics Term Project">
+
+        <script id="vertex-shader" type="x-shader/x-fragment">
+            attribute vec4 vPosition;
+            attribute vec2 aTextureCoord;
+
+            uniform mat4 uProjectionMatrix;
+            uniform mat4 uModelViewMatrix;
+
+            varying highp vec2 vTextureCoord;
+
+            void main()
+            {
+                gl_Position = vPosition * uModelViewMatrix * uProjectionMatrix;
+                vTextureCoord = aTextureCoord;
+            }
+        </script>
+
+        <script id="fragment-shader" type="x-shader/x-fragment">
+            precision mediump float;
+            uniform sampler2D uTexture;
+            varying highp vec2 vTextureCoord;
+
+            void main()
+            {
+                gl_FragColor = texture2D(uTexture, vTextureCoord);
+            }
+        </script>
+
+        <script type="text/javascript" src="initShaders.js"></script>
+        <script type="text/javascript" src="webgl-utils.js"></script>
+        <script type="text/javascript" src="MV.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+    </head>
+	<body>
+		<canvas id="gl-canvas" width="512" height="512">
+			Oops ... your browser doesn't support the HTML5 canvas element
+		</canvas>
+	</body>
+</html>
